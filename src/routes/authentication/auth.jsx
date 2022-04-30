@@ -1,6 +1,6 @@
-import { signInWithGooglePopup, createUserDocFromAuth, signInWithGoogleRedirect, auth } from '../utils/firebase/firebase';
-import SignUpForm from '../sign-up/sign-up-form';
-import SignInForm from '../sign-in/sign-in-form';
+import { signInWithGooglePopup, createUserDocFromAuth, signInWithGoogleRedirect, auth } from '../../components/utils/firebase/firebase';
+import SignUpForm from '../../components/sign-up/sign-up-form';
+import SignInForm from '../../components/sign-in/sign-in-form';
 import { Fragment, useEffect } from 'react';
 import { getRedirectResult } from 'firebase/auth';
 import './auth.scss'

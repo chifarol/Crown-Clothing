@@ -9,6 +9,7 @@ a{
   color: black;
 }
 body {
+  padding: 20px 40px;
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
