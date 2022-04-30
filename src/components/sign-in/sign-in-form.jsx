@@ -3,6 +3,8 @@ import { signInWithGooglePopup, createUserDocFromAuth, signInAuthUserWithEmailAn
 import FormInput from '../form-input/input-comp';
 import CustomButton from '../button/button'
 import './sign-in.scss';
+// import { UserContext } from '../contexts/usercontext';
+
 
 const defaultFields = {
     email: '',
@@ -13,21 +15,22 @@ const SignInForm = () => {
     const [formFields, setFormFields] = useState(defaultFields);
     const { email, password } = formFields;
 
-    const googleSignIn = async () => {
-        const { user } = await signInWithGooglePopup();
-        await createUserDocFromAuth(user);
-    }
 
+    // const { setCurrentUser } = useContext(UserContext);
     const resetFormFields = () => {
         setFormFields(defaultFields);
+    }
+    const googleSignIn = async () => {
+        const { user } = await signInWithGooglePopup();
+        // setCurrentUser(user)
     }
 
     const submitHandler = async (event) => {
         event.preventDefault();
 
         try {
-            const res = await signInAuthUserWithEmailAndPassword(email, password);
-            console.log(res)
+            const { user } = await signInAuthUserWithEmailAndPassword(email, password);
+            // setCurrentUser(user);
             // resetFormFields();
         }
         catch (err) {
@@ -38,7 +41,7 @@ const SignInForm = () => {
                 alert('E-mail Invalid');
             }
             else {
-                alert('Something Went Wrong =>s', err.code);
+                alert(err.code);
             }
         }
     };
@@ -57,7 +60,7 @@ const SignInForm = () => {
                 <br />
                 <div className="buttons-container">
                     <CustomButton type="submit" value="Sign In" buttonType='inverted' label="Sign In" />
-                    <CustomButton onClick={googleSignIn} type="button" value="Sign In with Google" buttonType='googlebtn' label="Sign In with Google" />
+                    <CustomButton onClick={googleSignIn} type="button" value="Sign In with Google" buttonType='googlebtn' label="Google Sign-In" />
 
                 </div>
             </form>

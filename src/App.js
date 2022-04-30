@@ -2,6 +2,7 @@
 import Home from './routes/home/Home';
 import Navigation from './components/navigation/navigation';
 import Authentication from './components/authentication/auth';
+import { UserContext, ContextProvider } from './components/contexts/usercontext';
 import { Route, Routes } from 'react-router-dom';
 
 const App = () => {

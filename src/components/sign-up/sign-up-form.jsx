@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { createAuthUserWithEmailAndPassword, createUserDocFromAuth } from '../utils/firebase/firebase';
+import { createAuthUserWithEmailAndPassword, signInWithGooglePopup, createUserDocFromAuth } from '../utils/firebase/firebase';
 import FormInput from '../form-input/input-comp';
-import CustomButton from '../button/button'
+import CustomButton from '../button/button';
+// import { UserContext } from '../contexts/usercontext';
 import './sign-up.scss';
 
 const defaultFields = {
@@ -15,10 +16,15 @@ const SignUpForm = () => {
     const [formFields, setFormFields] = useState(defaultFields);
     const { displayName, email, password, confirmPassword } = formFields;
 
+    // const { setCurrentUser } = useContext(UserContext);
     const resetFormFields = () => {
         setFormFields(defaultFields);
     }
-
+    const googleSignUp = async () => {
+        const { user } = await signInWithGooglePopup();
+        // await createUserDocFromAuth(user);
+        // setCurrentUser(user);
+    }
     const submitHandler = async (event) => {
         event.preventDefault();
         if (password !== confirmPassword) {
@@ -28,7 +34,8 @@ const SignUpForm = () => {
         try {
             const { user } = await createAuthUserWithEmailAndPassword(email, password);
             await createUserDocFromAuth(user, { displayName });
-            resetFormFields();
+            // setCurrentUser(user);
+            // resetFormFields();
         }
         catch (err) {
             if (err.code === 'auth/email-already-in-use') {
@@ -51,9 +58,10 @@ const SignUpForm = () => {
                 <FormInput label="Passsword" type="password" name="password" value={password} onChange={changeHandler} required />
                 <FormInput label="Confirm Password" type="password" name="confirmPassword" value={confirmPassword} onChange={changeHandler} required />
                 <br />
-                <CustomButton type="submit" value="Sign Up" buttonType='inverted' label="Sign Up" />
-
-
+                <div className="buttons-container">
+                    <CustomButton type="submit" value="Sign Up" buttonType='inverted' label="Sign Up" />
+                    <CustomButton onClick={googleSignUp} type="button" value="Sign In with Google" buttonType='googlebtn' label="Google Sign-Up" />
+                </div>
             </form>
         </div>
     )
