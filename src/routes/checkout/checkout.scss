@@ -1,0 +1,9 @@
+.checkout-container-plus{
+    margin: 20px 120px;
+    .checkout-container{
+   padding: 20px 0;
+        display: grid;
+        grid-template-columns: repeat(5,1fr);
+    }
+}
+

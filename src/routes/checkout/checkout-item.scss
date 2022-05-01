@@ -1,0 +1,31 @@
+.checkout-item-container{
+    padding: 10px 0;
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    border-top: 2px solid black;
+    align-items: center;
+    img{
+        width: 120px;
+    }
+    .details-wrapper{
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        
+        .specialChar-container{
+            width: 50px;
+            display: flex;
+            justify-content: center;
+                .specialChar{
+            transform: scale(2);
+            position: relative;
+            bottom: 3px;
+                font-weight: bold;
+                cursor: pointer;
+                padding: 0 20px;
+                }
+        }
+        
+    }
+    
+}
+

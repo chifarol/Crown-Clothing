@@ -10,7 +10,11 @@ import './navigation.scss'
 
 const Navigation = () => {
     const { currentUser } = useContext(UserContext);
-    const { isCartOpen, setIsCartOpen } = useContext(CartContext);
+    const { isCartOpen, setIsCartOpen, addedItems } = useContext(CartContext);
+    let totalItems = addedItems.reduce((previousValue, currentValue) => {
+        return previousValue + currentValue.quantity
+    }, 0);
+
     const toggleCart = () => setIsCartOpen(!isCartOpen);
     const finalizeSignOut = async () => {
         const out = await signOutUser();
@@ -29,8 +33,8 @@ const Navigation = () => {
                     ) : (<Link className="nav-link" to="/auth"> SIGN IN/UP </Link>)
                     }
                     <div>
-                        <CartIcon onClick={toggleCart} />
-                        {isCartOpen && <CartDropdown />}
+                        <CartIcon onClick={toggleCart} total={totalItems} />
+                        {isCartOpen && <CartDropdown addedItems={addedItems} />}
                     </div>
 
 
