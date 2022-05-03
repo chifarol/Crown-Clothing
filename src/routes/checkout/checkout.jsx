@@ -5,6 +5,9 @@ import { CartContext } from '../../components/contexts/cartcontext'
 
 const Checkout = () => {
     const { addedItems, setIsCartOpen } = useContext(CartContext);
+    const totalPrice = addedItems.reduce((prev, curr) => {
+        return prev + (curr.price * curr.quantity)
+    }, 0)
     useEffect(e => setIsCartOpen(false), [])
 
     return (
@@ -20,7 +23,9 @@ const Checkout = () => {
                 {
                     addedItems.map(e => { return <CheckoutItem item={e} key={e.id} /> })
                 }
+                <div className='total'>Total: {totalPrice}</div>
             </div>
+
         </Fragment>
     )
 }
